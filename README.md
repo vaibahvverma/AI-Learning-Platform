@@ -175,10 +175,6 @@ The application features a modern dark theme with:
 - 3D flashcard flip effects
 - Responsive design for all devices
 
-## 📝 License
-
-MIT License - feel free to use this project for learning or production!
-
 ## 🙏 Acknowledgments
 
 - [Google Gemini AI](https://deepmind.google/technologies/gemini/) for AI capabilities
