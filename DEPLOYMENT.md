@@ -65,7 +65,39 @@ Stateful data cannot be stored on free tier hosting efficiently, so we use a clo
 
 ---
 
-## 5. Final Configuration
+## 5. Deploy on Railway (Alternative to Render/Vercel)
+Railway is excellent for full-stack deployments and monorepos.
+
+### Option A: Monorepo Deployment (Recommended)
+You will create two services in Railway from the same GitHub repo: one for Backend, one for Frontend.
+
+#### 1. Deploy Backend
+1.  **New Project** > **Deploy from GitHub repo**.
+2.  Choose your repo.
+3.  **Configure**:
+    *   **Root Directory**: `backend`
+    *   **Build Command**: `npm install && npm run build`
+        *   *Note: If Railway asks for a start command and you haven't defined it in the UI, it usually detects `npm start` from `package.json`.*
+    *   **Environment Variables**:
+        *   `MONGODB_URI`: Your Atlas connection string.
+        *   `JWT_SECRET`: Random string.
+        *   `GEMINI_API_KEY`: Your API key.
+        *   `PORT`: `8080` (Railway often uses 8080 or provides a `$PORT` variable).
+4.  **Generate Domain**: Go to Settings > Generate Domain (e.g., `backend-production.up.railway.app`).
+
+#### 2. Deploy Frontend
+1.  **New Service** > **GitHub Repo** (Same repo).
+2.  **Configure**:
+    *   **Root Directory**: `frontend`
+    *   **Build Command**: `npm install && npm run build`
+    *   **Start Command**: `npm start`
+    *   **Environment Variables**:
+        *   `NEXT_PUBLIC_API_URL`: `https://<YOUR_BACKEND_DOMAIN>/api` (e.g., `https://backend-production.up.railway.app/api`).
+3.  **Generate Domain**: Go to Settings > Generate Domain.
+
+---
+
+## 6. Final Configuration
 
 1.  Go back to **Render Dashboard** (Backend).
 2.  Go to **Environment** settings.
