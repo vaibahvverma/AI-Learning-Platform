@@ -6,9 +6,3 @@ buildCommand = "npm install && npm run build"
 startCommand = "npm run start"
 healthcheckPath = "/api/health"
 healthcheckTimeout = 100
-restartPolicyType = "on-failure"
-restartPolicyMaxRetries = 10
-
-[service]
-# 512MB RAM, 0.5 vCPU is usually enough for simple node apps
-# But keeping defaults or explicitly setting them can help if resources are tight
