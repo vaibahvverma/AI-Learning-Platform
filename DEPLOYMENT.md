@@ -77,7 +77,7 @@ You will create two services in Railway from the same GitHub repo: one for Backe
 3.  **Configure**:
     *   **Root Directory**: `backend`
     *   **Build Command**: `npm install && npm run build`
-        *   *Note: If Railway asks for a start command and you haven't defined it in the UI, it usually detects `npm start` from `package.json`.*
+        *   *Note: If Railway asks for a start command and you haven1't defined it in the UI, it usually detects `npm start` from `package.json`.*
     *   **Environment Variables**:
         *   `MONGODB_URI`: Your Atlas connection string.
         *   `JWT_SECRET`: Random string.
@@ -93,7 +93,13 @@ You will create two services in Railway from the same GitHub repo: one for Backe
     *   **Start Command**: `npm start`
     *   **Environment Variables**:
         *   `NEXT_PUBLIC_API_URL`: `https://<YOUR_BACKEND_DOMAIN>/api` (e.g., `https://backend-production.up.railway.app/api`).
-3.  **Generate Domain**: Go to Settings > Generate Domain.
+    *   **Environment Variables**:
+        *   `NEXT_PUBLIC_API_URL`: `https://<YOUR_BACKEND_DOMAIN>/api` (e.g., `https://backend-production.up.railway.app/api`).
+3.  **Generate Domain** (Crucial Step):
+    *   Go to **Settings** tab.
+    *   Scroll to **Public Networking**.
+    *   Click **Generate Domain** (or copy the existing one).
+    *   *This is your Service URL.*
 
 ---
 

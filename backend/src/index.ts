@@ -52,16 +52,41 @@ app.use(errorHandler);
 const startServer = async () => {
     try {
         const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/ai-learning';
-        await mongoose.connect(mongoUri);
+
+        // Add connection options for better stability
+        await mongoose.connect(mongoUri, {
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+        });
         console.log('✅ Connected to MongoDB');
 
-        app.listen(Number(PORT), '0.0.0.0', () => {
+        const server = app.listen(Number(PORT), '0.0.0.0', () => {
             console.log(`🚀 Server running on port ${PORT}`);
             console.log(`📚 API endpoints available at /api`);
         });
+
+        // Graceful shutdown
+        const shutdown = async () => {
+            console.log('🛑 Shutting down server...');
+            server.close(() => {
+                console.log('Server closed');
+                mongoose.connection.close(false).then(() => {
+                    console.log('MongoDB connection closed');
+                    process.exit(0);
+                });
+            });
+        };
+
+        process.on('SIGTERM', shutdown);
+        process.on('SIGINT', shutdown);
+
     } catch (error) {
         console.error('❌ Failed to connect to MongoDB:', error);
-        process.exit(1);
+        // Don't exit immediately on transient errors in production, let Railway restart it if it crashes repeatedy, 
+        // but for connection setup handled by process manager, exit is fine.
+        // However, we can add a small delay before exiting to prevent tight loops
+        console.log('Retrying in 5 seconds...');
+        setTimeout(startServer, 5000);
     }
 };
 
