@@ -48,11 +48,19 @@ const config: Config = {
                     900: '#0f172a',
                     950: '#020617',
                 },
+                // New Deep Space Palette Extras
+                space: {
+                    900: '#030014', // Deepest background
+                    800: '#0F0529',
+                    700: '#1a103d',
+                }
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
                 'gradient-mesh': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'deep-space': 'radial-gradient(circle at center, #1a103d 0%, #030014 100%)',
+                'glow-conic': 'conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #2a8af6 360deg)',
             },
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-out',
@@ -62,6 +70,7 @@ const config: Config = {
                 'flip': 'flip 0.6s ease-in-out',
                 'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
                 'float': 'float 3s ease-in-out infinite',
+                'slow-spin': 'spin 10s linear infinite',
             },
             keyframes: {
                 fadeIn: {
@@ -97,6 +106,7 @@ const config: Config = {
                 'glow': '0 0 20px rgba(14, 165, 233, 0.3)',
                 'glow-lg': '0 0 40px rgba(14, 165, 233, 0.4)',
                 'glass': '0 8px 32px rgba(0, 0, 0, 0.1)',
+                'neon': '0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(14, 165, 233, 0.3)',
             },
             backdropBlur: {
                 'xs': '2px',

@@ -42,35 +42,40 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 py-12">
-            {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-primary-950/30 via-transparent to-transparent" />
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
+        <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden">
+            {/* Animated Background */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-900/20 rounded-full blur-[100px] animate-pulse-glow" />
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-accent-900/20 rounded-full blur-[100px] animate-float" />
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary-900/20 rounded-full blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
+            </div>
 
-            <div className="relative w-full max-w-md">
+            <div className="relative z-10 w-full max-w-md">
                 {/* Logo */}
-                <div className="text-center mb-8">
-                    <Link href="/" className="inline-flex items-center gap-2">
-                        <GraduationCap className="w-10 h-10 text-primary-500" />
-                        <span className="text-2xl font-bold gradient-text">LearnAI</span>
+                <div className="text-center mb-8 animate-slide-down">
+                    <Link href="/" className="inline-flex items-center gap-2 group">
+                        <div className="relative">
+                            <GraduationCap className="w-12 h-12 text-primary-400 relative z-10" />
+                            <div className="absolute inset-0 bg-primary-500/50 blur-lg animate-pulse" />
+                        </div>
+                        <span className="text-3xl font-bold font-outfit gradient-text">LearnAI</span>
                     </Link>
                 </div>
 
                 {/* Card */}
-                <div className="bg-dark-800/50 backdrop-blur-xl rounded-3xl p-8 border border-dark-700 shadow-2xl">
+                <div className="glass-card rounded-3xl p-8 animate-scale-in backdrop-blur-xl">
                     <div className="text-center mb-8">
-                        <h1 className="text-2xl font-bold text-white">Welcome Back</h1>
-                        <p className="text-dark-400 mt-2">Sign in to continue learning</p>
+                        <h1 className="text-2xl font-bold font-outfit text-white">Welcome Back</h1>
+                        <p className="text-slate-400 mt-2">Sign in to continue learning</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label className="block text-sm font-medium text-dark-300 mb-2">
+                        <div className="space-y-1">
+                            <label className="block text-sm font-medium text-slate-300 ml-1">
                                 Email Address
                             </label>
-                            <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
+                            <div className="relative group">
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-primary-400 transition-colors" />
                                 <input
                                     type="email"
                                     value={formData.email}
@@ -82,12 +87,12 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-dark-300 mb-2">
+                        <div className="space-y-1">
+                            <label className="block text-sm font-medium text-slate-300 ml-1">
                                 Password
                             </label>
-                            <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
+                            <div className="relative group">
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-primary-400 transition-colors" />
                                 <input
                                     type="password"
                                     value={formData.password}
@@ -102,7 +107,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full btn-primary flex items-center justify-center gap-2"
+                            className="w-full btn-primary flex items-center justify-center gap-2 mt-2"
                         >
                             {isLoading ? (
                                 <>
@@ -115,10 +120,10 @@ export default function LoginPage() {
                         </button>
                     </form>
 
-                    <div className="mt-6 text-center">
-                        <p className="text-dark-400">
+                    <div className="mt-8 pt-6 border-t border-white/10 text-center">
+                        <p className="text-slate-400">
                             Don&apos;t have an account?{' '}
-                            <Link href="/signup" className="text-primary-400 hover:text-primary-300 font-medium">
+                            <Link href="/signup" className="text-primary-400 hover:text-primary-300 font-semibold hover:underline decoration-primary-400/30 underline-offset-4">
                                 Sign Up
                             </Link>
                         </p>
