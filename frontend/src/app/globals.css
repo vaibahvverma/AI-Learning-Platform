@@ -35,155 +35,139 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Glass morphism utilities */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
+@layer components {
 
-.glass-dark {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
+  /* Glass morphism utilities */
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
 
-.glass-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
-  transition: all 0.3s ease;
-}
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(to right, #60a5fa, #c084fc, #f472b6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% auto;
-  animation: shine 5s linear infinite;
+  .glass-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    transition: all 0.3s ease;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(to right, #60a5fa, #c084fc, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px -5px rgba(100, 116, 139, 0.1), 0 0 20px rgba(14, 165, 233, 0.2);
+    border-color: rgba(14, 165, 233, 0.3);
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-primary-500 via-primary-600 to-accent-600 text-white font-semibold rounded-xl relative overflow-hidden transition-all duration-300 shadow-lg hover:shadow-primary-500/25 hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-white/20 translate-x-[-100%] transition-transform duration-500 skew-x-[-15deg];
+  }
+
+  .btn-primary:hover::before {
+    @apply translate-x-[200%];
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-white/5 text-white font-semibold rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-primary-500/50 backdrop-blur-sm;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200;
+  }
+
+  /* Input styles */
+  .input-field {
+    @apply w-full px-4 py-3 bg-dark-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all duration-300 backdrop-blur-sm;
+  }
+
+  /* Flashcard flip animation */
+  .flashcard-container {
+    perspective: 1000px;
+  }
+
+  .flashcard {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .flashcard.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .flashcard-front,
+  .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .flashcard-front {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(2, 132, 199, 0.2) 100%);
+    backdrop-filter: blur(20px);
+  }
+
+  .flashcard-back {
+    background: linear-gradient(135deg, rgba(217, 70, 239, 0.1) 0%, rgba(162, 28, 175, 0.2) 100%);
+    backdrop-filter: blur(20px);
+    transform: rotateY(180deg);
+  }
+
+  /* Loading animations */
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(14, 165, 233, 0.1);
+    border-top-color: #0ea5e9;
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite;
+  }
 }
 
 @keyframes shine {
   to {
     background-position: 200% center;
   }
-}
-
-/* Card hover effects */
-.card-hover {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px -5px rgba(100, 116, 139, 0.1), 0 0 20px rgba(14, 165, 233, 0.2);
-  border-color: rgba(14, 165, 233, 0.3);
-}
-
-/* Button styles */
-.btn-primary {
-  @apply px-6 py-3 bg-gradient-to-r from-primary-500 via-primary-600 to-accent-600 text-white font-semibold rounded-xl relative overflow-hidden transition-all duration-300 shadow-lg hover:shadow-primary-500/25 hover:scale-[1.02] active:scale-[0.98];
-}
-
-.btn-primary::before {
-  content: '';
-  @apply absolute inset-0 bg-white/20 translate-x-[-100%] transition-transform duration-500 skew-x-[-15deg];
-}
-
-.btn-primary:hover::before {
-  @apply translate-x-[200%];
-}
-
-.btn-secondary {
-  @apply px-6 py-3 bg-white/5 text-white font-semibold rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300 hover:border-primary-500/50 backdrop-blur-sm;
-}
-
-.btn-ghost {
-  @apply px-4 py-2 text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200;
-}
-
-/* Input styles */
-.input-field {
-  @apply w-full px-4 py-3 bg-dark-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-all duration-300 backdrop-blur-sm;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Flashcard flip animation */
-.flashcard-container {
-  perspective: 1000px;
-}
-
-.flashcard {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.flashcard.flipped {
-  transform: rotateY(180deg);
-}
-
-.flashcard-front,
-.flashcard-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-}
-
-.flashcard-front {
-  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(2, 132, 199, 0.2) 100%);
-  backdrop-filter: blur(20px);
-}
-
-.flashcard-back {
-  background: linear-gradient(135deg, rgba(217, 70, 239, 0.1) 0%, rgba(162, 28, 175, 0.2) 100%);
-  backdrop-filter: blur(20px);
-  transform: rotateY(180deg);
-}
-
-/* Loading animations */
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(14, 165, 233, 0.1);
-  border-top-color: #0ea5e9;
-  border-radius: 50%;
-  animation: spin 1s cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite;
 }
 
 @keyframes spin {
@@ -214,4 +198,23 @@ body {
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
