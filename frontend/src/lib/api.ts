@@ -97,4 +97,9 @@ export const quizApi = {
     getHistory: () => api.get('/quizzes/history'),
 };
 
+// Search API
+export const searchApi = {
+    search: (query: string) => api.get(`/search?q=${encodeURIComponent(query)}`),
+};
+
 export default api;

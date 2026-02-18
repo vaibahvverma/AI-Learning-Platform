@@ -92,3 +92,17 @@ export interface ApiResponse<T = unknown> {
     message?: string;
     data?: T;
 }
+
+export interface SearchResult {
+    id: string;
+    title: string;
+    subtitle: string;
+    type: 'document' | 'quiz' | 'flashcard';
+    date: string;
+}
+
+export interface SearchResults {
+    documents: SearchResult[];
+    quizzes: SearchResult[];
+    flashcards: SearchResult[];
+}

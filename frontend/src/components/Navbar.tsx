@@ -16,6 +16,7 @@ import {
     GraduationCap,
 } from 'lucide-react';
 import { useState } from 'react';
+import SearchBar from './SearchBar';
 
 const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: Home },
@@ -65,7 +66,7 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto glass rounded-2xl transition-all duration-300">
                 <div className="flex items-center justify-between h-16 px-4 sm:px-6">
                     {/* Logo */}
-                    <Link href="/dashboard" className="flex items-center gap-3 group">
+                    <Link href="/dashboard" className="flex items-center gap-3 group flex-shrink-0">
                         <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-500/20 to-accent-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white/5">
                             <GraduationCap className="w-5 h-5 text-primary-300" />
                         </div>
@@ -74,8 +75,13 @@ export default function Navbar() {
                         </span>
                     </Link>
 
+                    {/* Search Bar - Desktop */}
+                    <div className="hidden md:block flex-1 max-w-md mx-4">
+                        <SearchBar />
+                    </div>
+
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/5">
+                    <div className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/5">
                         {navItems.map((item) => {
                             const Icon = item.icon;
                             const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
@@ -119,7 +125,7 @@ export default function Navbar() {
                         {/* Mobile Menu Button */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="md:hidden p-2 text-slate-300 hover:text-white"
+                            className="lg:hidden p-2 text-slate-300 hover:text-white"
                         >
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
@@ -129,7 +135,10 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden absolute top-24 left-4 right-4 glass-dark rounded-2xl border border-white/10 animate-slide-down shadow-2xl overflow-hidden">
+                <div className="lg:hidden absolute top-24 left-4 right-4 glass-dark rounded-2xl border border-white/10 animate-slide-down shadow-2xl overflow-hidden">
+                    <div className="p-3 border-b border-white/5 md:hidden">
+                        <SearchBar />
+                    </div>
                     <div className="p-2 space-y-1">
                         {navItems.map((item) => {
                             const Icon = item.icon;

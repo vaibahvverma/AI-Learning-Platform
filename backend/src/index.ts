@@ -10,6 +10,7 @@ import documentRoutes from './routes/documentRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
 import flashcardRoutes from './routes/flashcardRoutes.js';
 import quizRoutes from './routes/quizRoutes.js';
+import searchRoutes from './routes/searchRoutes.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 
 // Load environment variables
@@ -38,6 +39,7 @@ app.use('/api/documents', documentRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/flashcards', flashcardRoutes);
 app.use('/api/quizzes', quizRoutes);
+app.use('/api/search', searchRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {
